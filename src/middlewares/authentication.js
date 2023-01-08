@@ -10,8 +10,6 @@ const authentication = async (req,res,next) => {
         const users = new User();
         const user = users.allUsers().find(item => item.id == userDecoded.id);
 
-        console.log(user);
-
         if(!token) {
             return res.status(401).end();
         }
@@ -27,7 +25,6 @@ const authentication = async (req,res,next) => {
 
         
     } catch(err) {
-        console.log(err.toString());
         return res.status(401).json(err);
     }
 };

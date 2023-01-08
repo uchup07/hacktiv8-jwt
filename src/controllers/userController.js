@@ -36,7 +36,10 @@ let viewUser = (req, res) => {
 }
 
 let deleteUser = (req, res) => {
-    res.send({message: "This is Delete User"});
+    let user = new User();
+    let data = req.body;
+    let updateData = user.deleteUser(req.params.userId);
+    res.send({message: "Delete User Successfully!", data: updateData});
 }
 
 let signIn = (req, res) => {
@@ -65,4 +68,11 @@ let signIn = (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, createUser, updateUser, viewUser, deleteUser, signIn }
+let signUp = (req,res) => {
+    let user = new User();
+    let data = req.body;
+    let newData = user.saveUser(data);
+    res.send({message: 'Thank you for Signing Up!', data: newData});
+}
+
+module.exports = { getAllUsers, createUser, updateUser, viewUser, deleteUser, signIn, signUp }

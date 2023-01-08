@@ -35,7 +35,6 @@ class User {
         let userUpdate;
         users.find(item => {
             if(item.id === Number(id)) {
-                console.log(data.email);
                 userUpdate = {
                     "username": ((data.username !== undefined) ? data.username : item.username),
                     "email": ((data.email !== undefined) ? data.email : item.email),
@@ -55,6 +54,16 @@ class User {
     }
 
     deleteUser(id) {
+        let users = this.allUsers();
+        let totalUser = users.length;
+        users = users.filter(user => user.id != id);
+
+        users = JSON.stringify(users);
+        fs.writeFileSync(userData, users);
+
+        let newData = JSON.parse(users);
+
+        return newData;
 
     }
 }
